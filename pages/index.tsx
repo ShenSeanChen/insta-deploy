@@ -51,6 +51,13 @@ import Modal from "../components/Modal"
 //     --> Create uploadPost async function in modal.js
 // 18. npm i react-moment
 // 19. final thing - git - create a new repo and copy-paste: git remote add origin git@github.com:ShenSeanChen/insta-deploy.git
+// 20. deployment error about not being able to redirect url: https://github.com/nextauthjs/next-auth/issues/3245
+    // Define a secret like this:
+
+    // Add SECRET="MY_STRONG_SECRET" to your .env
+    // Replace MY_STRONG_SECRET with a strong secret generate by a tool like https://generate-secret.vercel.app/32
+    // Add secret: process.env.SECRET, at the same level as the providers array to pages/api/auth/[...nextauth].js
+
 
 const Home: NextPage = () => {
   return (
