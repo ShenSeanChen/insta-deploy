@@ -5,9 +5,9 @@ import {Dialog, Transition} from "@headlessui/react";
 import { CameraIcon } from '@heroicons/react/outline';
 //npm i @headlessui/react
 import {db, storage} from "../firebase";
-import { addDoc, collection, serverTimestamp, updateDoc, doc } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp, updateDoc, doc} from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
-import {ref, getDownloadURL, uploadString, loading, setLoading} from "@firebase/storage";
+import {ref, getDownloadURL, uploadString} from "@firebase/storage";
 
 
 function Modal() {
@@ -15,6 +15,7 @@ function Modal() {
 
     const [open, setOpen] = useRecoilState(modalState)
     const filePickerRef = useRef(null);
+    const [loading, setLoading] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const captionRef = useRef(null);
 
@@ -31,7 +32,7 @@ function Modal() {
 
     const uploadPost = async () => {
         if(loading) return;
-        // setLoading(true);
+        setLoading(true);
 
         // 1) Create a post and add to firestore 'posts' collection
         const docRef = await addDoc(collection(db, 'posts'), {
@@ -57,7 +58,7 @@ function Modal() {
         });
 
         setOpen(false);
-        // setLoading(false);
+        setLoading(false);
         setSelectedFile(null);
         
     }
