@@ -19,6 +19,8 @@ import {db, storage} from "../firebase";
 import { addDoc, collection, serverTimestamp, updateDoc, doc, onSnapshot, orderBy, query, setDoc, deleteDoc } from 'firebase/firestore';
 import {ref, getDownloadURL, uploadString, loading, setLoading} from "@firebase/storage";
 import Moment from "react-moment"
+import { useRecoilState } from 'recoil';
+import { ModifyPostModalState } from '../atoms/ModifyPostModalAtom';
 
 // function Post(props) {
 function Post({ id, username, userImg, img, caption}) {
@@ -32,9 +34,11 @@ function Post({ id, username, userImg, img, caption}) {
   const [hasLiked, setHasLiked] = useState(false);
   const [likesCount, setLikesCount] = useState([]);
 
-
 //   console.log('post user profile img: ', userImg)
 //   console.log('post user profile img trimmed: ', userImg)
+
+  // modify Post Modal
+  const [modifyPostOpen, setModifyPostOpen] = useRecoilState(ModifyPostModalState)
 
   // Update Comments
   useEffect(
@@ -100,6 +104,17 @@ function Post({ id, username, userImg, img, caption}) {
 
 //   console.log('userImg: ', userImg)
 
+
+  // Delete post
+  const deletePost = async () => {
+    await deleteDoc(doc(db, 'posts', id))
+    try {await deleteDoc(doc(db, 'posts', id, 'comments'))} catch(err) {console.log(err.message)};
+    try {await deleteDoc(doc(db, 'posts', id, 'likes'))} catch(err) {console.log(err.message)};
+  }
+  console.log('Post ID: ', id)
+  // console.log('current logged in user name: ', session?.user?.username)
+
+
   return (
     <div className="bg-white my-7 border  rounded-lg">
 
@@ -109,7 +124,15 @@ function Post({ id, username, userImg, img, caption}) {
                 className="h-12 w-12 rounded-full object-contain border p-1 mr-3"
             />
             <p className="flex-1 font-bold">{username}</p>
-            <DotsHorizontalIcon className="h-5 mr-2" />
+            <DotsHorizontalIcon onClick={()=>setModifyPostOpen(!modifyPostOpen)} className={`h-5 mr-2 hover:bg-gray-200 rounded-full h-8 p-2`} />
+            {
+                // (
+                    session?.user?.username == username 
+                    // || session?.user?.username == 'seanchen') 
+                    && modifyPostOpen && (
+                <button className={`text-red-300 text-sm`} onClick={()=>deletePost()}>Delete</button>
+            )}
+            
         </div>
 
         {/* Image */}

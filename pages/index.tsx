@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Header from "../components/Header"
 import Feed from "../components/Feed"
 import Modal from "../components/Modal"
+import { HomeIcon } from '@heroicons/react/solid'
 
 
 

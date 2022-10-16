@@ -173,7 +173,7 @@ function Modal() {
                                     <button
                                         type="button"
                                         onClick={uploadPost}
-                                        diabled={!selectedFile}
+                                        disabled={!selectedFile}
                                         className='inline-flex justify-center w-full rounded-md
                                         border border-transparent shadow-sm
                                         px-4 py-2 bg-blue-300 text-base font-medium text-white

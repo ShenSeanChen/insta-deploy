@@ -40,10 +40,15 @@ function Posts() {
             query(collection(db, 'posts'), orderBy('timestamp', 'desc')),
             snapshot => { //snapshot is a real-time listener for the backend
                 setPosts(snapshot.docs);
+                // setPosts(snapshot)
         });
 
+        // console.log('logging snapshot for posts: ', posts);
+
         return unsubscribe;
-    }, [db])
+    }, [db]);
+
+    
 
     // console.log('recording posts')
     // console.log(posts)
@@ -56,11 +61,15 @@ function Posts() {
         // console.log('profileImg: ', e.data().profileImg)
         return e.data().profileImg
       }
+    
+    // const q = query(collection(db, 'posts'))
+    // console.log('log the db queried: ', q)
+    // console.log('testing posts: ', posts)
 
     if (posts != null) {
         return (
             <div>
-    
+                {/* <div>haha</div> */}
                 {/* Posts  */}
                 {/* {posts.map((post) => (
                     <Post key={post.id} id={post.id}
