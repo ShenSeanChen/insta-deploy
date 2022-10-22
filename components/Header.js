@@ -133,7 +133,7 @@ function Header() {
 					</div>
 
 					<img 
-						onClick={signOut}
+						onClick={() => signOut()}
 						src={session?.user?.image}
 						// src="https://lh3.googleusercontent.com/a/AItbvmlrshufbStw5Lm75OfyiTMDVYmPTg8Kl1JmftjhtQ=s96-c"
 						// src={getProfile}
@@ -146,7 +146,7 @@ function Header() {
 				</>
 				
 			) : (
-				<button onClick={signIn}>Sign In</button>
+				<button onClick={() => signIn()}>Sign In</button>
 			)}
 			
 			
