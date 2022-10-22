@@ -101,7 +101,7 @@ function Header() {
 
 
 	  	{/* Right --- Buttons!!! */}
-		<div className="flex mr-2 items-center justify-end space-x-4 md:space-x-4 sm:space-x-2 xs:space-x-1">
+		<div className="flex items-center justify-end space-x-4 md:space-x-4 sm:space-x-2 xs:space-x-1">
 
 			<MenuIcon className="h-6 md:hidden cursor-pointer" />
 			{/* <PlusCircleIcon onClick={() => setOpen(true)} className="h-6 md:hidden cursor-pointer"/> */}
